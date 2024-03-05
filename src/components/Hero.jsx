@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import consoleContext from "./Context/Context";
-
+import Datepicker from "react-tailwindcss-datepicker";
 
 function Hero() {
  
-  const { date,setdate,issubmitted,setissubmitted } = useContext(consoleContext)
-  
+  const { value,setValue,issubmitted,setissubmitted } = useContext(consoleContext)
+  let formattedDate
   const formatDate = (dateString) => {
     const [year, month, day] = dateString.split("-");
     return `${day}-${month}-${year}`;
   };
-  console.log(date);
 
+    const handleValueChange = (newValue) => {
+    console.log("newValue:", newValue); 
+    setValue(newValue); 
+    } 
+   
   return (
     <div className="mx-20 px-32 py-20 font-HedvigLettersSans">
       <div className="flex">
@@ -54,25 +58,22 @@ function Hero() {
 
         <div className="flex-col flex space-y-2">
           <label>Date by Range</label>
-          <input
-            min="01-01-2024"
-            max="31-03-2024"
-            className="px-3 py-4 h-8 border-2 rounded-md"
-            type="date"
+          <Datepicker 
+           
             
-            onChange={(e)=>{const selectedDate = e.target.value;
-              const formattedDate = formatDate(selectedDate);
-              setdate(formattedDate)}}
-          />
+            value={value} 
+            onChange={handleValueChange} 
+/> 
         </div>
 
-        <span
+        <div
           type="submit"
-          onClick={()=>(setissubmitted((prev)=>!prev))}
-          className="w-10 h-10 px-3 border-2 rounded-sm bg-blue-600 place-self-end"
+          onClick={()=>{(setissubmitted((prev)=>!prev))
+          }}
+          className="w-10 h-10 px-3 py-3  border-2 rounded-sm bg-blue-600 place-self-end"
         >
           <img className="w-3" src="arrow-right-solid.svg" alt="" />
-        </span>
+        </div>
       </form>
 
      
