@@ -59,8 +59,6 @@ function Hero() {
         <div className="flex-col flex space-y-2">
           <label>Date by Range</label>
           <Datepicker 
-           
-            
             value={value} 
             onChange={handleValueChange} 
 /> 
@@ -69,8 +67,9 @@ function Hero() {
         <div
           type="submit"
           onClick={()=>{(setissubmitted((prev)=>!prev))
+            console.log(issubmitted);
           }}
-          className="w-10 h-10 px-3 py-3  border-2 rounded-sm bg-blue-600 place-self-end"
+          className="w-10 h-10 px-3 py-3 cursor-pointer border-2 rounded-sm bg-blue-600 place-self-end"
         >
           <img className="w-3" src="arrow-right-solid.svg" alt="" />
         </div>

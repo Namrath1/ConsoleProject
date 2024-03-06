@@ -30,13 +30,7 @@ function MonthCard(props) {
     props.month === "OCT" ||
     props.month === "DEC"
   ) {
-    if (!issubmitted) {
-      for (let i = 0; i < data.length; i++) {
-        if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber) {
-          arr2.push(data[i]);
-        }
-      }
-    } else {
+    if (issubmitted) {
       if (value.startDate.slice(5,7) === value.endDate.slice(5,7)) {
         for (let i = 0; i < data.length; i++) {
           if (
@@ -63,7 +57,7 @@ function MonthCard(props) {
             
         }
       }
-    }
+    } 
     arr2.sort((a, b) => {
       const dateA = a.Date;
       const dateB = b.Date;
@@ -82,9 +76,9 @@ function MonthCard(props) {
       if (arr2[j]?.Profit > 0 && parseInt(arr2[j]?.Date.slice(0, 2)) === i) {
         arr.push(
           <div
-            className="bg-green-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-green-600 h-[20px] w-[20px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else if (
@@ -93,17 +87,17 @@ function MonthCard(props) {
       ) {
         arr.push(
           <div
-            className="bg-red-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-red-600 h-[20px] w-[20px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else
         arr.push(
           <div
-            className="bg-[#f4f4f4] h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-[#f4f4f4] h-[20px] w-[20px]  cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
-          ></div>
+          >{i}</div>
         );
     }
   } else if (
@@ -112,13 +106,7 @@ function MonthCard(props) {
     props.month === "SEP" ||
     props.month === "NOV"
   ) {
-    if (!issubmitted) {
-      for (let i = 0; i < data.length; i++) {
-        if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber) {
-          arr2.push(data[i]);
-        }
-      }
-    } else {
+    if (issubmitted) {
       if (value.startDate.slice(5,7) === value.endDate.slice(5,7)) {
         for (let i = 0; i < data.length; i++) {
           if (
@@ -166,9 +154,9 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-green-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-green-600 h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] border-black text-white text-[10px] py-1 rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else if (
@@ -178,63 +166,57 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-red-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-red-600 h-[20px] w-[20px] text-white text-center   cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-[#f4f4f4] h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-[#f4f4f4] h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
     }
   } else {
-    if (!issubmitted) {
+    if (issubmitted) {
+      if (value.startDate.slice(5,7) === value.endDate.slice(5,7)) {
         for (let i = 0; i < data.length; i++) {
-          if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber) {
-            arr2.push(data[i]);
+          if (
+            parseInt(data[i]?.Date.slice(0, 2)) >=
+              parseInt(value.startDate.slice(8, 10)) &&
+            parseInt(data[i]?.Date.slice(0, 2)) <=
+              parseInt(value.endDate.slice(8, 10))
+          ) {
+            if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber && props.monthnumber===parseInt(value.startDate.slice(5,7))) {
+              arr2.push(data[i]);
+             
+            }
           }
         }
-      } else {
-        if (value.startDate.slice(5,7) === value.endDate.slice(5,7)) {
-          for (let i = 0; i < data.length; i++) {
-            if (
-              parseInt(data[i]?.Date.slice(0, 2)) >=
-                parseInt(value.startDate.slice(8, 10)) &&
-              parseInt(data[i]?.Date.slice(0, 2)) <=
-                parseInt(value.endDate.slice(8, 10))
-            ) {
-              if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber && props.monthnumber===parseInt(value.startDate.slice(5,7))) {
+      }
+      else{
+        for (let i = 0; i < data.length; i++) {
+            if (parseInt(data[i]?.Date.slice(3,5))*100+parseInt(data[i]?.Date.slice(0,2))>=parseInt(value.startDate.slice(5,7))*100+parseInt(value.startDate.slice(8,10))&&parseInt(data[i]?.Date.slice(3,5))*100+parseInt(data[i]?.Date.slice(0,2))<=parseInt(value.endDate.slice(5,7))*100+parseInt(value.endDate.slice(8,10))) {
+              if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber && props.monthnumber>=parseInt(value.startDate.slice(5,7))&&props.monthnumber<=parseInt(value.endDate.slice(5,7))) {
                 arr2.push(data[i]);
                
               }
             }
-          }
-        }
-        else{
-          for (let i = 0; i < data.length; i++) {
-              if (parseInt(data[i]?.Date.slice(3,5))*100+parseInt(data[i]?.Date.slice(0,2))>=parseInt(value.startDate.slice(5,7))*100+parseInt(value.startDate.slice(8,10))&&parseInt(data[i]?.Date.slice(3,5))*100+parseInt(data[i]?.Date.slice(0,2))<=parseInt(value.endDate.slice(5,7))*100+parseInt(value.endDate.slice(8,10))) {
-                if (parseInt(data[i]?.Date.slice(3, 5)) === props.monthnumber && props.monthnumber>=parseInt(value.startDate.slice(5,7))&&props.monthnumber<=parseInt(value.endDate.slice(5,7))) {
-                  arr2.push(data[i]);
-                 
-                }
-              }
-              
-          }
+            
         }
       }
+      } 
     for (let i = 1, j = 0; i <= 28; i++) {
       if (arr2[j]?.Profit > 0 && parseInt(arr2[j]?.Date.slice(0, 2)) === i) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-green-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-green-600 h-[20px] w-[20px] text-center text-white  cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else if (
@@ -244,18 +226,18 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-red-600 h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-red-600 h-[20px] w-[20px] text-white text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
         j++;
       } else
         arr.push(
           <div
             onClick={()=>{setisActivated(true)}}
-            className="bg-[#f4f4f4] h-[15px] w-[15px] cursor-pointer hover:border-[1px] border-black"
+            className="bg-[#f4f4f4] h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
-          ></div>
+          >{i}</div>
         );
     }
   }
@@ -263,7 +245,7 @@ function MonthCard(props) {
   return (
     <div className="flex flex-col font-HedvigLettersSans">
       <span className="py-2 text-sm font-extralight">{props.month}</span>
-      <div className="grid grid-cols-5 gap-1 w-[5.2rem] mb-3">{arr}</div>
+      <div className="grid grid-cols-7 gap-2 mb-3">{arr}</div>
     </div>
   );
 }

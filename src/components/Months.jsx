@@ -1,8 +1,12 @@
-import React from 'react'
+
+import { useContext } from 'react';
 import MonthCard from './MonthCard';
+import consoleContext from './Context/Context';
+
 
 function Months() {
   
+  const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
 
     let months = [
       {
@@ -55,12 +59,13 @@ function Months() {
       }
       ];
   return (
-    <section className="px-10 flex justify-center">
-    <div className="flex space-x-3">
+    <section className="px-10 flex justify-center ">
+      {issubmitted ?  <div className="flex flex-wrap gap-7 justify-center">
       {months.map((i) => {
         return <MonthCard month={i.month} monthnumber={i.monthnumber} key={i.monthnumber} />;
       })}
-    </div>
+    </div> : <p>Please Select the Date Range</p>}
+   
   </section>
   )
 }
