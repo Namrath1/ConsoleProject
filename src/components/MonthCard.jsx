@@ -7,6 +7,12 @@ function MonthCard(props) {
   let arr = [];
   let arr2 = [];
 
+  function click(i) {
+    console.log(
+      i+"/"+props.monthnumber
+    )
+  }
+
   const [data, setdata] = useState([]);
   const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
   useEffect(() => {
@@ -76,7 +82,8 @@ function MonthCard(props) {
       if (arr2[j]?.Profit > 0 && parseInt(arr2[j]?.Date.slice(0, 2)) === i) {
         arr.push(
           <div
-            className="bg-green-600 h-[20px] w-[20px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
+          onClick={()=>{console.log(i+"/"+props.month);}}
+            className="bg-green-600 h-[19px] w-[19px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
           >{i}</div>
         );
@@ -87,7 +94,7 @@ function MonthCard(props) {
       ) {
         arr.push(
           <div
-            className="bg-red-600 h-[20px] w-[20px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
+            className="bg-red-600 h-[19px] w-[19px] text-white cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
           >{i}</div>
         );
@@ -95,7 +102,7 @@ function MonthCard(props) {
       } else
         arr.push(
           <div
-            className="bg-[#f4f4f4] h-[20px] w-[20px]  cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
+            className="bg-[#f4f4f4] h-[19px] w-[19px] cursor-pointer hover:border-[1px] border-black rounded-[4px] text-[10px] py-1 text-center"
             key={i}
           >{i}</div>
         );
@@ -154,7 +161,7 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-green-600 h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] border-black text-white text-[10px] py-1 rounded-[4px]"
+            className="bg-green-600 h-[19px] w-[19px] text-center cursor-pointer hover:border-[1px] border-black text-white text-[10px] py-1 rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -166,7 +173,7 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-red-600 h-[20px] w-[20px] text-white text-center   cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
+            className="bg-red-600 h-[19px] w-[19px] text-white text-center   cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -175,7 +182,7 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-[#f4f4f4] h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
+            className="bg-[#f4f4f4] h-[19px] w-[19px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -214,7 +221,7 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-green-600 h-[20px] w-[20px] text-center text-white  cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
+            className="bg-green-600 h-[19px] w-[19px] text-center text-white  cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -226,7 +233,7 @@ function MonthCard(props) {
         arr.push(
           <div
           onClick={()=>{setisActivated(true)}}
-            className="bg-red-600 h-[20px] w-[20px] text-white text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
+            className="bg-red-600 h-[19px] w-[19px] text-white text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -234,8 +241,8 @@ function MonthCard(props) {
       } else
         arr.push(
           <div
-            onClick={()=>{setisActivated(true)}}
-            className="bg-[#f4f4f4] h-[20px] w-[20px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
+          onClick={()=>{console.log(i+"/"+props.month);}}
+            className="bg-[#f4f4f4] h-[19px] w-[19px] text-center cursor-pointer hover:border-[1px] text-[10px] py-1 border-black rounded-[4px]"
             key={i}
           >{i}</div>
         );
@@ -243,8 +250,8 @@ function MonthCard(props) {
   }
 
   return (
-    <div className="flex flex-col font-HedvigLettersSans">
-      <span className="py-2 text-sm font-extralight">{props.month}</span>
+    <div className="flex flex-col font-HedvigLettersSans space-y-2 ">
+      <span className="py-2 text-sm font-extralight">{props.monthName}</span>
       <div className="grid grid-cols-7 gap-2 mb-3">{arr}</div>
     </div>
   );

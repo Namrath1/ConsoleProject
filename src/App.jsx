@@ -5,6 +5,7 @@ import Months from "./components/Months"
 import Navbar from "./components/Navbar"
 import Summary from "./components/Summary"
 import consoleContext from "./components/Context/Context"
+import TradesTable from "./components/TradesTable"
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       <Hero/>
       <Months/>
       <Summary/>
-     
+      <TradesTable/>
       
       
     </ConsoleContextProvider>

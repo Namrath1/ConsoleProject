@@ -17,7 +17,7 @@ function Hero() {
     } 
    
   return (
-    <div className="mx-20 px-32 py-20 font-HedvigLettersSans">
+    <div className="mx-20 px-32 pt-20 font-HedvigLettersSans">
       <div className="flex">
         <img
           src="https://console.zerodha.com/static/images/bar-chart.svg"
@@ -56,15 +56,18 @@ function Hero() {
           />
         </div>
 
-        <div className="flex-col flex space-y-2">
+        <div className="flex-col flex space-y-2 ">
           <label>Date by Range</label>
+          <div className="border-2 rounded-md ">
           <Datepicker 
+            
             value={value} 
-            onChange={handleValueChange} 
-/> 
+            onChange={handleValueChange} /> 
+          </div>
         </div>
 
         <div
+         
           type="submit"
           onClick={()=>{(setissubmitted((prev)=>!prev))
             console.log(issubmitted);

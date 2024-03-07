@@ -4,7 +4,8 @@ function Navbar() {
   return (
     <div className='flex justify-around h-16 items-center font-HedvigLettersSans border-b-2 shadow-md'>
         <div className='w-24'> 
-        <img src="https://console.zerodha.com/static/images/logo.svg" alt="" />
+        <span className='font-bold text-2xl'>Trading.</span>
+        <span className='font-bold text-xl italic text-blue-600'>console</span>
         </div>
 
         <div >

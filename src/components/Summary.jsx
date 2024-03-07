@@ -27,8 +27,8 @@ function color(){
 const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
   return (
 
-    <div onMouseOver={color} className='flex bg-[#f4f4f4] w-[74%] mx-auto items-center py-10 justify-around my-10'>
-      {issubmitted ? <> <div className='flex flex-col space-y-2'>
+    <>
+      {issubmitted ? <div onMouseOver={color} className='flex bg-[#fafafb] w-[74%] mx-auto items-center py-10 justify-around my-10'> <div className='flex flex-col space-y-2'>
         <label>Realised P&L</label>
         <span style={{color:textcolor}} className='text-2xl'>{symbol}{Profit}</span>
         </div>
@@ -51,9 +51,10 @@ const { issubmitted, value,setisActivated,isActivated } = useContext(consoleCont
         <div className='flex flex-col space-y-2'>
         <label>Unrealised P&L</label>
         <span className='text-2xl'>+10.1K</span>
-        </div> </> : <p></p>}
+        </div> <div/>
+        </div> : <p></p>}
        
-    </div>
+    </>
   )
 }
 
