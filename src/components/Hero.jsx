@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import consoleContext from "./Context/Context";
 import Datepicker from "react-tailwindcss-datepicker";
-
+import { animateLeftToRight, animateToTop } from "../components/gsap.js";
 function Hero() {
  
   const { value,setValue,issubmitted,setissubmitted } = useContext(consoleContext)
-  let formattedDate
+  
   const formatDate = (dateString) => {
     const [year, month, day] = dateString.split("-");
     return `${day}-${month}-${year}`;
@@ -16,67 +16,48 @@ function Hero() {
     setValue(newValue); 
     } 
    
+    animateLeftToRight(".hero");
   return (
-    <div className="mx-20 px-32 pt-20 font-HedvigLettersSans">
-      <div className="flex">
+    <div className="hero mx-20 px-32 pt-20 font-HedvigLettersSans bg-black text-white">
+      <div className="flex justify-between">
+        <div className="flex">
         <img
           src="https://console.zerodha.com/static/images/bar-chart.svg"
           alt=""
         />
-        <span className="text-2xl">P&L</span>
+        <span className="text-2xl">Report</span>
+        </div>
+        
+        {issubmitted?<button onClick={()=>{setissubmitted((prev)=>!prev)}} className="bg-blue-500 rounded-md px-3 py-2">Go back</button>:<></>}
+
       </div>
 
-      <form className="flex justify-between w-full py-5" method="submit">
-        <div className="flex-col flex space-y-2">
-          <label>Segment</label>
-          <select className="w-44 px-3 py-2 border-2 rounded-md text-sm">
-            <option value="Equity">Equity</option>
-            <option value="Future&Options">Future&Options</option>
-            <option value="Currency">Currency</option>
-            <option value="Commodity">Commodity</option>
-            <option value="Mutual Funds">Mutual Funds</option>
-          </select>
-        </div>
+      
 
-        <div className="flex-col flex space-y-2">
-          <label>P&L</label>
-          <select className="w-44 px-3 border-2 text-sm py-2 rounded-md">
-            <option value="Equity">Combined</option>
-            <option value="Future&Options">Realised P&L</option>
-            <option value="Currency">Unrealised P&L</option>
-          </select>
-        </div>
+      {issubmitted?<p></p>:<form className="flex justify-center w-full space-x-4 py-5" method="submit">
+       
 
-        <div className="flex-col flex space-y-2  ">
-          <label>Symbol</label>
-          <input
-            className="h-8 border-2 rounded-md px-3 py-4 text-sm"
-            type="text"
-            placeholder="Ex: INFY,RELIANCE"
-          />
-        </div>
+       <div className="flex-col flex space-y-2 ">
+         <label>Date by Range</label>
+         <div className="border-2 rounded-md ">
+         <Datepicker 
+           
+           value={value} 
+           onChange={handleValueChange} /> 
+         </div>
+       </div>
 
-        <div className="flex-col flex space-y-2 ">
-          <label>Date by Range</label>
-          <div className="border-2 rounded-md ">
-          <Datepicker 
-            
-            value={value} 
-            onChange={handleValueChange} /> 
-          </div>
-        </div>
-
-        <div
-         
-          type="submit"
-          onClick={()=>{(setissubmitted((prev)=>!prev))
-            console.log(issubmitted);
-          }}
-          className="w-10 h-10 px-3 py-3 cursor-pointer border-2 rounded-sm bg-blue-600 place-self-end"
-        >
-          <img className="w-3" src="arrow-right-solid.svg" alt="" />
-        </div>
-      </form>
+       <div
+        
+         type="submit"
+         onClick={()=>{(setissubmitted((prev)=>!prev))
+           console.log(issubmitted);
+         }}
+         className="w-10 h-10 px-3 py-3 cursor-pointer border-2 rounded-sm bg-blue-600 place-self-end"
+       >
+         <img className="w-3" src="arrow-right-solid.svg" alt="" />
+       </div>
+     </form>}
 
      
     </div>

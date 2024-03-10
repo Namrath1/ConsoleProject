@@ -2,33 +2,46 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import consoleContext from './Context/Context';
 
+
 function Summary() {
   const [Profit, setProfit] = useState(0);
   const [textcolor, settextcolor] = useState("");
   const [symbol, setsymbol] = useState("");
+  const [otherCharges, setotherCharges] = useState(0);
   const [charges, setcharges] = useState(0);
   const [net, setnet] = useState(0);
+  const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
+  console.log(isActivated);
+  
   useEffect(() => {
-    axios.get("http://localhost:3000/getsummary").then((resp)=>{
-       
-      setProfit(resp.data.sum)
-      setcharges(resp.data.charges);
-      setnet(resp.data.net)
+   
+    if(isActivated){
+      axios.post("http://localhost:3000/getselected",{ isActivated:isActivated }).then((resp)=>{
+      console.log(resp);
+      setProfit(resp.data[0]?.Profit)
+      console.log(Profit);
+      setcharges(resp.data[0]?.Charges)
+      setotherCharges(resp.data[0]?.STTCTT)
+      setnet(resp.data[0]?.Profit-(resp.data[0]?.Charges+resp.data[0]?.STTCTT))
+      
     })
-}, []);
-function color(){
-    if (Profit>0) {
- settextcolor("#10b987")
- setsymbol("+")
-} else {
- settextcolor("red")
+   
+        if (Profit>0) {
+            settextcolor("#10b987")
+            setsymbol("+")
+        } else {
+            setsymbol("")
+            settextcolor("red")
+        }
+      
+    }
+  }, [isActivated,Profit]);
+  
 
-}}
-const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
   return (
 
     <>
-      {issubmitted ? <div onMouseOver={color} className='flex bg-[#fafafb] w-[74%] mx-auto items-center py-10 justify-around my-10'> <div className='flex flex-col space-y-2'>
+      {issubmitted ?<div className='flex bg-[#222121] w-[74%] mx-auto items-center py-10 justify-around my-10 text-[#dad7d7]'> <div className='flex flex-col space-y-2'>
         <label>Realised P&L</label>
         <span style={{color:textcolor}} className='text-2xl'>{symbol}{Profit}</span>
         </div>
@@ -40,7 +53,7 @@ const { issubmitted, value,setisActivated,isActivated } = useContext(consoleCont
 
         <div className='flex flex-col space-y-2'>
         <label>Other credits & debits</label>
-        <span className='text-2xl'>+10.1K</span>
+        <span className='text-2xl'>{otherCharges}</span>
         </div>
 
         <div className='flex flex-col space-y-2'>

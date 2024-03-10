@@ -1,30 +1,19 @@
-import { useContext } from "react"
-import ConsoleContextProvider from "./components/Context/ContextProvider"
-import Hero from "./components/Hero"
-import Months from "./components/Months"
-import Navbar from "./components/Navbar"
-import Summary from "./components/Summary"
-import consoleContext from "./components/Context/Context"
-import TradesTable from "./components/TradesTable"
-
+import ConsoleContextProvider from "./components/Context/ContextProvider";
+import AnnualReport from "./components/AnnualReport";
+import LandingPage from "./components/LandingPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { value,setValue,issubmitted,setissubmitted } = useContext(consoleContext)
-
   return (
-    
     <ConsoleContextProvider>
-      
-
-      <Navbar/>
-      <Hero/>
-      <Months/>
-      <Summary/>
-      <TradesTable/>
-      
-      
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/report" element={<AnnualReport />} />
+        </Routes>
+      </Router>
     </ConsoleContextProvider>
-  )
+  );
 }
 
-export default App
+export default App;
