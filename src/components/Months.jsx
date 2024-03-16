@@ -1,7 +1,7 @@
 
 import { useContext } from 'react';
 import MonthCard from './MonthCard';
-import consoleContext from './Context/Context';
+import consoleContext from './Context/Context'
 
 
 function Months() {
