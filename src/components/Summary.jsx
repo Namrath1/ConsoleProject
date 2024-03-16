@@ -61,10 +61,7 @@ function Summary() {
         <span style={{color:textcolor}}  className='text-2xl'>{symbol}{net}</span>
         </div>
 
-        <div className='flex flex-col space-y-2'>
-        <label>Unrealised P&L</label>
-        <span className='text-2xl'>+10.1K</span>
-        </div> <div/>
+         <div/>
         </div> : <p></p>}
        
     </>

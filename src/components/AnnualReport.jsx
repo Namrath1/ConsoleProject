@@ -9,7 +9,7 @@ import consoleContext from "./Context/Context"
 import TradesTable from "./TradesTable"
 
 function AnnualReport() {
-    const { value,setValue,issubmitted,setissubmitted } = useContext(consoleContext)
+    
   return (
     <div className='bg-black min-h-screen'>
       <Navbar/>

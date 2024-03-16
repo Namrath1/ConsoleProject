@@ -5,9 +5,27 @@ function TradesTable() {
    
     const { issubmitted, value,setisActivated,isActivated } = useContext(consoleContext);
     const [data, setdata] = useState([]);
+    let arr=[]
     useEffect(() => {
         axios.get("http://localhost:3000/getdata").then((resp)=>{setdata(resp.data)}).catch((err)=>console.log(err))
     }, []);
+
+   if (issubmitted) {
+    
+     for (let i = 0; i < data.length; i++) {
+       if (
+         parseInt(data[i]?.Date.slice(0, 2)) >=
+           parseInt(value.startDate.slice(8, 10)) &&
+         parseInt(data[i]?.Date.slice(0, 2)) <=
+           parseInt(value.endDate.slice(8, 10))
+       ) {
+         
+           arr.push(data[i]);
+          
+         
+       }
+     }
+   }
 
   return (
     <>
