@@ -3,8 +3,8 @@ import consoleContext from "./Context";
 
 const ConsoleContextProvider = ({children}) => {
     const [value, setValue] = useState({ 
-        startDate: new Date(), 
-        endDate: new Date().setMonth(11),
+        startDate: "01-01-2024", 
+        endDate: "31-12-2024"
         }); 
     const [issubmitted, setissubmitted] = useState(false);
     const [isActivated, setisActivated] = useState("");

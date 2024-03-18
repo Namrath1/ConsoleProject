@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { animateLeftToRight, animateToTop } from "../components/gsap.js";
+import { animateLeftToRight, animateToTop } from "./gsap/gsap.js";
 import Navbar from "./Navbar.jsx";
 import axios from "axios";
 
@@ -21,6 +21,9 @@ function LandingPage() {
   const [BuyingPrice, setBuyingPrice] = useState(0);
   const [SellingPrice, setSellingPrice] = useState(0);
   const [dateentered, setdate] = useState("");
+  const [check, setcheck] = useState(false);
+  const [visible, setvisible] = useState("none");
+
 
   function select() {
     var x = document.getElementById("didyoutrade").value;
@@ -32,21 +35,38 @@ function LandingPage() {
 
 
 
-   function Submitform() {
-    
-
-     axios.post("http://localhost:3000/newentry", {
-      Symbol: ScripName,
-      Date: dateentered,
-      Profit: Profit,
-      Quantity:Quantity,
-      BuyingPrice:BuyingPrice,
-      SellingPrice:SellingPrice, 
-    }).then((resp)=>{console.log(resp);});
-  }
+    async function Submitform() {
+     
+     await axios.post("http://localhost:3000/newentry", {
+       Symbol: ScripName,
+       Date: dateentered,
+       Profit: Profit,
+       Quantity:Quantity,
+       BuyingPrice:BuyingPrice,
+       SellingPrice:SellingPrice, 
+      }).then((resp)=>{
+        if (resp.data.message.Date) {
+          setcheck(true);
+          setTimeout(function() {
+            setcheck(false)
+          }, 3000);
+        }
+        
+        console.log(resp);
+      });
+      
+        setvisible("block")
+        setTimeout(function() {
+          setvisible("none")
+        }, 2000);
+      
+    }
   return (
-    <div className="bg-black min-h-screen scroll-smooth">
+    <div className="bg-black min-h-screen ">
       <Navbar />
+      <div style={check?{display:visible,borderColor:"blue"}:{display:visible,borderColor:"red"}} id="notify" className="fixed z-10 right-0  top-20 text-white pl-10 pr-36 border-l-4  py-3 bg-[#171717]">
+                {check?<p>Submitted Successfully</p>:<p>Document already exists</p>}
+      </div>
       <div className="px-32 py-14">
         <div className="contact flex justify-center py-10 ">
           <h1 className="text-6xl text-white font-SpaceGrotesk font-bold  ">
@@ -90,7 +110,9 @@ function LandingPage() {
           {trade ? (
             <div className="space-y-7">
 
-<div className="flex text-white sm:flex-row flex-col w-full sm:gap-2 gap-5 items-center">
+             
+
+              <div className="flex text-white sm:flex-row flex-col w-full sm:gap-2 gap-5 items-center">
                 <div className="space-y-1 sm:w-1/2 w-full">
                   <p className="rounded-full border border-gray-600 opacity-90 bg-black w-5 text-center text-slate-400 font-SpaceGrotesk text-xs ">
                     1

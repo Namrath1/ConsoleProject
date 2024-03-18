@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import consoleContext from "./Context/Context";
 import Datepicker from "react-tailwindcss-datepicker";
-import { animateLeftToRight, animateToTop } from "../components/gsap.js";
+import { animateLeftToRight, animateToTop } from "./gsap/gsap.js";
 function Hero() {
  
   const { value,setValue,issubmitted,setissubmitted } = useContext(consoleContext)
